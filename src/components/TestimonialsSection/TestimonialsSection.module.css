@@ -36,3 +36,23 @@
   display: flex;
   justify-content: center;
 }
+
+@media (min-width: 768px) {
+  .section {
+    padding: 10rem 1.5rem;
+  }
+
+  .heading {
+    font-size: 1.25rem;
+    margin-bottom: 5rem;
+  }
+
+  .cardsList {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.25rem, 2.5vw, 1.875rem);
+    max-width: 1110px;
+    margin-inline: auto;
+    align-items: start;
+  }
+}
