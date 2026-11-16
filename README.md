@@ -1,107 +1,144 @@
 # Frontend Mentor - Sunnyside agency landing page
 
-![Design preview for the Sunnyside agency landing page coding challenge](preview.jpg)
+[Frontend Mentor의 Sunnyside agency landing page 챌린지](https://www.frontendmentor.io/challenges/agency-landing-page-7yVs3B6ef)를 구현한 레파지토리입니다.
 
-## Welcome! 👋
+## 목차
 
-Thanks for checking out this front-end coding challenge.
+- [개요](#개요)
+  - [과제 요구사항](#과제-요구사항)
+  - [미리보기](#미리보기)
+  - [링크](#링크)
+- [개발 과정 및 아키텍처](#개발-과정-및-아키텍처)
+  - [사용 기술](#사용-기술)
+  - [핵심 기술적 의사결정 및 배운 점](#핵심-기술적-의사결정-및-배운-점)
+  - [참고자료](#참고자료)
+  - [AI 협업 회고](#ai-협업-회고)
+- [작성자](#작성자)
 
-[Frontend Mentor](https://www.frontendmentor.io) challenges help you improve your coding skills by building realistic projects.
+## 개요
 
-**To do this challenge, you need a basic understanding of HTML, CSS and JavaScript.**
+### 과제 요구사항
 
-## The challenge
+- 디바이스 화면 크기(320px 모바일 화면부터 1440px 이상의 대형 데스크톱 모니터까지)에 따른 최적의 반응형 레이아웃 제공
+- 모든 인터랙티브 요소(링크, 버튼, 스크롤 화살표, 소셜 아이콘)의 호버 및 포커스 상태 구현
+- 키보드 네비게이션 및 스크린 리더 친화적인 시맨틱 마크업 구축
 
-Your challenge is to build out this landing page and get it looking as close to the design as possible.
+### 미리보기
 
-This challenge focuses mostly on HTML & CSS. There's a tiny bit of JS included for the mobile navigation toggle. But you could also choose to do this without JS!
+(배포 후 첨부 예정)
 
-You can use any tools you like to help you complete the challenge. So if you've got something you'd like to practice, feel free to give it a go.
+### 링크
+- 프론트엔드 멘토 솔루션: (배포 및 제출 후 첨부 예정)
+- 라이브 배포 사이트: (배포 후 첨부 예정)
 
-Your users should be able to:
+## 개발 과정 및 아키텍처
 
-- View the optimal layout for the site depending on their device's screen size
-- See hover states for all interactive elements on the page
+### 사용 기술
+- **시맨틱 HTML5 랜드마크**: `<header>`, `<main>`, `<footer>`, `<section>`, `<nav>`, `<picture>`
+- **CSS Custom Properties**: 디자인 시스템 토큰화 및 색상 관리
+- **모바일 퍼스트 (Mobile-First)** 반응형 아키텍처
+- **Unified CSS Grid**: 모바일과 데스크톱 전반에 걸친 단일 그리드 서식 맥락 유지
+- **Pure CSS Modules**: 런타임 오버헤드 없는 스타일 캡슐화
+- **유동적 반응형 수식**: 2점 선형 보간법($y = mx + b$) 기반의 CSS `clamp()` 계산
+- **React 19 & TypeScript**: 엄격한 타입 안정성 및 컴포넌트 도메인 캡슐화
+- **Vite & pnpm**: 격리된 의존성 구조 및 초고속 빌드 파이프라인
 
-### Want some support on the challenge? 
+### 핵심 기술적 의사결정 및 배운 점
 
-[Join our community](https://www.frontendmentor.io/community) and ask questions in the **#help** channel.
+#### 1. 서식 맥락(Formatting Context) 일관성을 위한 Unified CSS Grid 도입
 
-## Where to find everything
+모바일에서 `display: flex;`를 쓰다가 데스크톱에서 `display: grid;`로 전환하는 전통적인 패턴 대신, 모바일 기본 스타일부터 **Grid Formatting Context (GFC)**를 선언하여 서식 맥락의 일관성을 유지했습니다:
 
-Your task is to build out the project to the designs inside the `/design` folder. You will find both a mobile and a desktop version of the design.
+```css
+/* 기본 모바일: 1열 그리드 */
+.section {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+}
 
-The designs are in JPG static format. Using JPGs will mean that you'll need to use your best judgment for styles such as `font-size`, `padding` and `margin`.
+/* 데스크톱: 컨텍스트 전환 없이 열(Track) 정의만 확장 */
+@media (min-width: 768px) {
+  .section {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-If you would like the Figma design file to inspect the design in more detail, you can [subscribe as a PRO member](https://www.frontendmentor.io/pro).
+/* 명시적 2차원 좌표 지정을 통한 지그재그(Zig-zag) 배치 */
+  .section > :nth-child(1) {
+    grid-column: 2;
+    grid-row: 1;
+  }
 
-You will find all the required assets in the `/images` folder. The assets are already optimized.
+.section > :nth-child(2) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+}
+```
 
-There is also a `style-guide.md` file containing the information you'll need, such as color palette and fonts.
+* **도입 배경**: 브라우저 렌더링 엔진이 Flex 컨텍스트와 Grid 컨텍스트 사이를 오가며 겪는 서식 전환 오버헤드를 없애고, 자식 요소의 2차원 배치 속성(`grid-column`, `grid-row`)을 일관되게 제어하기 위함입니다.
 
-## Using AI coding assistants
+#### 2. 스타일 가이드 불일치 및 접근성 해결을 위한 `color-mix()` 활용
 
-We've included two files to help you if you're using AI coding assistants (like Claude, GitHub Copilot, Cursor, etc.) while working on this challenge:
+제공된 스타일 가이드의 푸터 배경색 토큰(`--green-500: hsl(167, 34%, 41%)`)은 명도가 낮아 시안(L=70%)과 일치하지 않았고, 본문 텍스트(`--green-800`)와의 명도 대비비가 1.7:1에 불과해 WCAG AA 기준을 위반했습니다.
 
-- `AGENTS.md` - Contains detailed instructions for AI assistants on how to help you with this challenge. It's tailored to this challenge's difficulty level, so the AI will provide guidance appropriate to your learning stage—offering more support for beginner challenges and encouraging more independence on advanced ones.
-- `CLAUDE.md` - A pointer file that directs Claude-based tools to the AGENTS.md instructions.
+기존 토큰을 임의로 변조하거나 하드코딩하는 대신, CSS Color Module Level 4의 `color-mix()` 표준 함수를 활용했습니다:
 
-**How to use them:** You don't need to do anything! These files are automatically detected by most AI coding tools. The AI will read them and adjust its behavior to be a better learning partner—guiding you toward solutions rather than just giving you the answers.
+```css
+.footer {
+  background-color: color-mix(in srgb, var(--green-500) 45%, white);
+}
+```
 
-**Note:** These files are designed to help you *learn*, not to do the work for you. The AI is instructed to ask questions, give hints, and explain concepts rather than writing complete solutions.
+* **결과**: 디자인 토큰의 맥락을 계승하면서도 시안과의 시각적 일치율을 확보하고, **4.6:1의 안정적인 WCAG AA 명도 대비**를 달성했습니다.
 
-## Building your project
+#### 3. 2점 선형 보간법을 통한 엄밀한 `clamp()` 수식 도출
 
-Feel free to use any workflow that you feel comfortable with. Below is a suggested process, but do not feel like you need to follow these steps:
+어림짐작 뷰포트 단위(`vw`)를 사용할 경우 320px 최저 너비 화면에서 푸터 메뉴가 줄바꿈되거나 넘치는 문제가 발생했습니다. 이를 해결하기 위해 두 기준점($320\text{px} \rightarrow 28\text{px}$, $375\text{px} \rightarrow 56\text{px}$)을 지나는 1차 함수($y = mx + b$)를 유도하여 오차 없는 유동적 갭을 적용했습니다:
 
-1. Initialize your project as a public repository on [GitHub](https://github.com/). Creating a repo will make it easier to share your code with the community if you need help. If you're not sure how to do this, [have a read-through of this Try Git resource](https://try.github.io/).
-2. Configure your repository to publish your code to a web address. This will also be useful if you need some help during a challenge as you can share the URL for your project with your repo URL. There are a number of ways to do this, and we provide some recommendations below.
-3. Look through the designs to start planning out how you'll tackle the project. This step is crucial to help you think ahead for CSS classes to create reusable styles.
-4. Before adding any styles, structure your content with HTML. Writing your HTML first can help focus your attention on creating well-structured content.
-5. Write out the base styles for your project, including general content styles, such as `font-family` and `font-size`.
-6. Start adding styles to the top of the page and work down. Only move on to the next section once you're happy you've completed the area you're working on.
+$$\text{기울기 } m = \frac{56 - 28}{375 - 320} \approx 0.5091 \quad (50.91\text{vw})$$
+$$y절편 b = 28 - (0.5091 \times 320) = -134.9\text{px} \approx -8.43\text{rem}$$
 
-## Deploying your project
+```css
+.navList {
+  gap: clamp(1.75rem, 50.91vw - 8.43rem, 3.5rem);
+}
+```
 
-As mentioned above, there are many ways to host your project for free. Our recommended hosts are:
+#### 4. `MediaQueryList` API를 통한 반응형 메뉴 상태 동기화
 
-- [GitHub Pages](https://pages.github.com/)
-- [Vercel](https://vercel.com/)
-- [Netlify](https://www.netlify.com/)
+모바일 환경에서 햄버거 메뉴를 열어둔 상태로 기기를 가로로 회전하거나 데스크톱 분기점(768px 이상)으로 창을 넓혔을 때, React의 `isOpen` 상태와 `aria-expanded` 속성이 불일치하는 엣지 케이스를 발견했습니다.
 
-You can host your site using one of these solutions or any of our other trusted providers. [Read more about our recommended and trusted hosts](https://www.frontendmentor.io/guides/hosting-your-solution).
+무거운 `window.onresize` 대신 W3C 표준 `matchMedia` 이벤트 리스너를 바인딩하여 768px 분기점에 진입하는 순간 메뉴 상태를 안전하게 자동 초기화하도록 처리했습니다.
 
-## Create a custom `README.md`
+```tsx
+useEffect(() => {
+  const mediaQueryList: MediaQueryList = window.matchMedia('(min-width: 768px)');
+  const handleMediaChange = (event: MediaQueryListEvent): void => {
+    if (event.matches) {
+      setIsOpen(false);
+    }
+  };
 
-We strongly recommend overwriting this `README.md` with a custom one. We've provided a template inside the [`README-template.md`](./README-template.md) file in this starter code.
+  mediaQueryList.addEventListener('change', handleMediaChange);
+  return () => mediaQueryList.removeEventListener('change', handleMediaChange);
+}, []);
+```
 
-The template provides a guide for what to add. A custom `README` will help you explain your project and reflect on your learnings. Please feel free to edit our template as much as you like.
+### 참고자료
 
-Once you've added your information to the template, delete this file and rename the `README-template.md` file to `README.md`. That will make it show up as your repository's README file.
+- [W3C CSS Grid Layout Module Level 2](https://www.w3.org/TR/css-grid-2/) - 그리드 트랙 정의 및 2차원 명시적 배치 표준 명세
+- [MDN Web Docs: color-mix()](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix) - sRGB 색상 공간에서의 색상 혼합 표준 및 문법
+- [W3C WCAG 2.1: Contrast (Minimum)](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html) - 웹 콘텐츠 접근성 가이드라인 1.4.3 명도 대비(4.5:1) 기준
+- [CSS-Tricks: Linearly Scale font-size with CSS clamp()](https://css-tricks.com/linearly-scale-font-size-with-css-clamp-based-on-the-viewport/) - 뷰포트 기반 선형 보간 수식($y = mx + b$) 유도 기법
+- [MDN Web Docs: Window.matchMedia()](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia) - 뷰포트 미디어 쿼리 변화 감지 및 `MediaQueryList` 이벤트 리스너 표준
 
-## Submitting your solution
+### AI 협업 회고
 
-Submit your solution on the platform for the rest of the community to see. Follow our ["Complete guide to submitting solutions"](https://www.frontendmentor.io/guides/how-to-submit-solutions) for tips on how to do this.
+Google Antigravity와의 페어 프로그래밍을 통해 진행되었습니다. 단순히 생성된 코드를 복사하는 것이 아니라, "왜 이 기술과 속성을 사용해야 하는지"를 컴퓨터공학 이론과 웹 표준에 기반하여 집요하게 질문하고 검증했습니다.
 
-Remember, if you're looking for feedback on your solution, be sure to ask questions when submitting it. The more specific and detailed you are with your questions, the higher the chance you'll get valuable feedback from the community.
+특히 인페이지 앵커의 정보 구조적 한계 검토, Grid 서식 맥락 일관성, 접근성 명도 대비 계산 등 실무적인 엣지 케이스들을 주도적으로 짚어내며 완성도 높은 프로덕션을 완성할 수 있었습니다.
 
-## Sharing your solution
-
-There are multiple places you can share your solution:
-
-1. Share your solution page in the **#finished-projects** channel of the [community](https://www.frontendmentor.io/community). 
-2. Share on [X (formerly Twitter)](https://x.com/frontendmentor) and mention **@frontendmentor**, including the repo and live URLs in your post. We'd love to take a look at what you've built and help share it around.
-3. Share your solution on [LinkedIn](https://www.linkedin.com/company/frontend-mentor/).
-4. Blog about your experience building your project. Writing about your workflow, technical choices, and talking through your code is a brilliant way to reinforce what you've learned. Great platforms to write on are [dev.to](https://dev.to/), [Hashnode](https://hashnode.com/), and [CodeNewbie](https://community.codenewbie.org/).
-
-We provide templates to help you share your solution once you've submitted it on the platform. Please do edit them and include specific questions when you're looking for feedback. 
-
-The more specific you are with your questions the more likely it is that another member of the community will give you feedback.
-
-## Got feedback for us?
-
-We love receiving feedback! We're always looking to improve our challenges and our platform. So if you have anything you'd like to mention, please email hi[at]frontendmentor[dot]io.
-
-This challenge is completely free. Please share it with anyone who will find it useful for practice.
-
-**Have fun building!** 🚀
+## 작성자
+- Frontend Mentor - [@neont21](https://www.frontendmentor.io/profile/neont21)
+- GitHub - [@neont21](https://github.com/neont21)
