@@ -1,0 +1,36 @@
+:root {
+  --red-400: hsl(7, 99%, 70%);
+  --yellow-500: hsl(51, 100%, 49%);
+  --green-800: hsl(167, 40%, 24%);
+  --blue-800: hsl(198, 62%, 26%);
+  --green-500: hsl(167, 34%, 41%);
+
+  --grey-950: hsl(212, 27%, 19%);
+  --grey-600: hsl(213, 9%, 39%);
+  --grey-550: hsl(232, 10%, 55%);
+  --grey-400: hsl(210, 4%, 67%);
+  --white: hsl(0, 100%, 100%);
+
+  --ff-barlow: "Barlow", sans-serif;
+  --ff-fraunces: "Fraunces", serif;
+
+  --fw-barlow-semi-bold: 600;
+  --fw-fraunces-bold: 700;
+  --fw-fraunces-black: 900;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-size: 1.125rem;
+  /* 18px */
+  font-family: var(--ff-barlow);
+  font-weight: var(--fw-barlow-semi-bold);
+  line-height: 1.5;
+  color: var(--grey-950);
+}
