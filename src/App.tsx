@@ -1,10 +1,14 @@
-import { HeroSection } from "./components/HeroSection/HeroSection";
+import { FeaturesSection } from './components/FeaturesSection/FeaturesSection';
+import { HeroSection } from './components/HeroSection/HeroSection';
 
 function App() {
   return (
-    <main>
+    <>
       <HeroSection />
-    </main>
+      <main>
+        <FeaturesSection />
+      </main>
+    </>
   );
 }
 

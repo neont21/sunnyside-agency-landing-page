@@ -1,0 +1,73 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 1.5rem;
+  background-color: var(--white);
+}
+
+.title {
+  margin: 0 0 1.5rem;
+  font-family: var(--ff-fraunces);
+  font-weight: var(--fw-fraunces-black);
+  font-size: 2rem;
+  line-height: 1.25;
+  color: var(--grey-950);
+  max-width: 18ch;
+}
+
+.description {
+  margin: 0 0 2rem;
+  font-family: var(--ff-barlow);
+  font-weight: var(--fw-barlow-semi-bold);
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: var(--grey-550);
+  max-width: 32ch;
+}
+
+.linkWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.link {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  font-family: var(--ff-fraunces);
+  font-weight: var(--fw-fraunces-black);
+  font-size: 0.9375rem;
+  text-transform: uppercase;
+  color: var(--grey-950);
+  letter-spacing: 0.05em;
+  padding: 0 0.5rem;
+  z-index: 1;
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  right: 0;
+  height: 0.55rem;
+  border-radius: 9999px;
+  z-index: -1;
+  opacity: 0.25;
+  transition: opacity 0.2s ease;
+}
+
+.link:hover::after,
+.link:focus-visible::after {
+  opacity: 1;
+}
+
+.underlineYellow::after {
+  background-color: var(--yellow-500);
+}
+
+.underlineRed::after {
+  background-color: var(--red-400);
+}
