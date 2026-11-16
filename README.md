@@ -25,11 +25,15 @@
 
 ### 미리보기
 
-(배포 후 첨부 예정)
+#### 데스크톱 화면 (Desktop View)
+![데스크톱 뷰](./screenshot-desktop-view.png)
+
+#### 모바일 화면 (Mobile View)
+![모바일 뷰](./screenshot-mobile-view.png)
 
 ### 링크
-- 프론트엔드 멘토 솔루션: (배포 및 제출 후 첨부 예정)
-- 라이브 배포 사이트: (배포 후 첨부 예정)
+- 프론트엔드 멘토 솔루션: [Frontend Mentor 솔루션](https://www.frontendmentor.io/solutions/sunnyside-landing-page-mobile-first-with-react-and-css-grid-UTr5Obs43G)
+- 라이브 배포 사이트: [GitHub Pages 바로가기](https://neont21.github.io/sunnyside-agency-landing-page)
 
 ## 개발 과정 및 아키텍처
 
