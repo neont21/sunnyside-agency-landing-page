@@ -1,4 +1,5 @@
 import { FeaturesSection } from './components/FeaturesSection/FeaturesSection';
+import { FooterSection } from './components/FooterSection/FooterSection';
 import { GallerySection } from './components/GallerySection/GallerySection';
 import { HeroSection } from './components/HeroSection/HeroSection';
 import { TestimonialsSection } from './components/TestimonialsSection/TestimonialsSection';
@@ -12,6 +13,7 @@ function App() {
         <TestimonialsSection />
         <GallerySection />
       </main>
+      <FooterSection />
     </>
   );
 }
