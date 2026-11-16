@@ -21,7 +21,6 @@
 .toggleButton {
   background: none;
   border: none;
-  /* 클릭 영역(터치 타겟)을 확장하면서 위치 유지 */
   padding: 0.5rem;
   margin: -0.5rem;
   cursor: pointer;
@@ -103,4 +102,60 @@
 .contactButton:active {
   filter: brightness(0.85);
   transform: scale(0.98);
+}
+
+@media (min-width: 768px) {
+  .nav {
+    padding: 2.125rem 3rem;
+  }
+
+  .toggleButton {
+    display: none;
+  }
+
+  .menuList {
+    display: flex;
+    position: static;
+    background-color: transparent;
+    padding: 0;
+    flex-direction: row;
+    align-items: center;
+    gap: 2.875rem;
+    box-shadow: none;
+    width: auto;
+  }
+
+  .menuList::before {
+    display: none;
+  }
+
+  .menuItem {
+    width: auto;
+  }
+
+  .menuLink {
+    color: var(--white);
+    font-size: 1.125rem;
+  }
+
+  .menuLink:hover,
+  .menuLink:focus-visible {
+    color: var(--white);
+    opacity: 0.75;
+  }
+
+  .contactButton {
+    background-color: var(--white);
+    color: var(--grey-950);
+    padding: 1rem 1.875rem;
+    transition: background-color 0.25s ease, color 0.25s ease, opacity 0.25s ease;
+  }
+
+  .contactButton:hover,
+  .contactButton:focus-visible {
+    background-color: rgba(255, 255, 255, 0.25);
+    color: var(--white);
+    filter: none;
+    opacity: 1;
+  }
 }

@@ -52,3 +52,21 @@
   width: 2rem;
   height: auto;
 }
+
+@media (min-width: 768px) {
+  .hero {
+    height: 800px;
+    background-image: url('/images/desktop/image-header.jpg');
+  }
+
+  .content {
+    margin-top: 4.5rem;
+  }
+
+  .title {
+    font-size: 3.5rem;
+    letter-spacing: 0.2em;
+    padding-left: 0.2em;
+    margin-bottom: 6rem;
+  }
+}
