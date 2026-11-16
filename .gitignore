@@ -8,8 +8,12 @@
 /.pnp
 .pnp.js
 yarn.debug.log*
+yarn-debug.log*
 yarn.error.log*
+yarn-error.log*
 npm-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
 
 # Environment and secrets
 .env
@@ -17,6 +21,7 @@ npm-debug.log*
 .env.development.local
 .env.test.local
 .env.production.local
+*.local
 
 # Testing
 /coverage
@@ -24,16 +29,24 @@ npm-debug.log*
 # Production
 /build
 /dist
+/dist-ssr
 /.next
 /out
 
 # IDEs and editors
 /.idea
-/.vscode
+/.vscode/*
+!/.vscode/extensions.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 *.swp
 *.swo
 
 # Misc
+logs
 *.log
 *.pem
 .DS_Store
