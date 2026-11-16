@@ -1,3 +1,4 @@
+import { getAssetUrl } from '../../../utils/asset';
 import styles from './ComplexCard.module.css';
 
 interface ComplexCardProps {
@@ -34,10 +35,10 @@ export function ComplexCard({
     <article className={`${styles.card} ${textColorClass} ${className ?? ''}`}>
       <picture className={styles.bgPicture}>
         {desktopSrc && (
-          <source media="(min-width: 768px)" srcSet={desktopSrc} />
+          <source media="(min-width: 768px)" srcSet={getAssetUrl(desktopSrc)} />
         )}
         <img
-          src={mobileSrc}
+          src={getAssetUrl(mobileSrc)}
           alt=""
           aria-hidden="true"
           className={styles.bgImage}

@@ -1,3 +1,4 @@
+import { getAssetUrl } from '../../utils/asset';
 import styles from './FooterSection.module.css';
 
 /**
@@ -28,7 +29,7 @@ export function FooterSection() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src="/images/icon-facebook.svg" alt="" aria-hidden="true" className={styles.socialIcon} />
+            <img src={getAssetUrl('/images/icon-facebook.svg')} alt="" aria-hidden="true" className={styles.socialIcon} />
           </a>
         </li>
         <li>
@@ -39,7 +40,7 @@ export function FooterSection() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src="/images/icon-instagram.svg" alt="" aria-hidden="true" className={styles.socialIcon} />
+            <img src={getAssetUrl('/images/icon-instagram.svg')} alt="" aria-hidden="true" className={styles.socialIcon} />
           </a>
         </li>
         <li>
@@ -50,7 +51,7 @@ export function FooterSection() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src="/images/icon-twitter.svg" alt="" aria-hidden="true" className={styles.socialIcon} />
+            <img src={getAssetUrl('/images/icon-twitter.svg')} alt="" aria-hidden="true" className={styles.socialIcon} />
           </a>
         </li>
         <li>
@@ -61,7 +62,7 @@ export function FooterSection() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src="/images/icon-pinterest.svg" alt="" aria-hidden="true" className={styles.socialIcon} />
+            <img src={getAssetUrl('/images/icon-pinterest.svg')} alt="" aria-hidden="true" className={styles.socialIcon} />
           </a>
         </li>
       </ul>

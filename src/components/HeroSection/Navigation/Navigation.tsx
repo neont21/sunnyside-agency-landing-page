@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { getAssetUrl } from '../../../utils/asset';
 import styles from './Navigation.module.css';
 
 /**
@@ -36,7 +37,7 @@ export function Navigation() {
   return (
     <nav className={styles.nav} aria-label="Main Navigation">
       <a href="/" className={styles.logoLink} aria-label="Sunnyside Home">
-        <img src="/images/logo.svg" alt="Sunnyside" className={styles.logo} />
+        <img src={getAssetUrl('/images/logo.svg')} alt="Sunnyside" className={styles.logo} />
       </a>
 
       <button
@@ -47,7 +48,7 @@ export function Navigation() {
         aria-label="Toggle navigation menu"
         onClick={handleToggle}
       >
-        <img src="/images/icon-hamburger.svg" alt="" aria-hidden="true" />
+        <img src={getAssetUrl('/images/icon-hamburger.svg')} alt="" aria-hidden="true" />
       </button>
 
       <ul

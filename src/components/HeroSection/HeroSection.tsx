@@ -1,3 +1,4 @@
+import { getAssetUrl } from '../../utils/asset';
 import { Navigation } from './Navigation/Navigation';
 import styles from './HeroSection.module.css';
 
@@ -17,7 +18,7 @@ export function HeroSection() {
           aria-label="Scroll down to features"
         >
           <img
-            src="/images/icon-arrow-down.svg"
+            src={getAssetUrl('/images/icon-arrow-down.svg')}
             alt=""
             aria-hidden="true"
             className={styles.arrowIcon}

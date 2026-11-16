@@ -1,3 +1,4 @@
+import { getAssetUrl } from '../../../utils/asset';
 import styles from './TestimonialCard.module.css';
 
 interface TestimonialCardProps {
@@ -25,12 +26,7 @@ export function TestimonialCard({
 }: TestimonialCardProps) {
   return (
     <figure className={`${styles.card} ${className ?? ''}`}>
-      <img
-        src={avatarSrc}
-        alt={name}
-        className={styles.avatar}
-        loading="lazy"
-      />
+      <img src={getAssetUrl(avatarSrc)} alt={`${name}'s avatar`} className={styles.avatar} />
 
       <blockquote className={styles.quote}>
         <p className={styles.quoteText}>{quote}</p>

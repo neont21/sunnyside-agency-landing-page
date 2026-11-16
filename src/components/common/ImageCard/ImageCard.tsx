@@ -1,3 +1,4 @@
+import { getAssetUrl } from '../../../utils/asset'
 import styles from './ImageCard.module.css';
 
 interface ImageCardProps {
@@ -25,10 +26,10 @@ export function ImageCard({
     <div className={`${styles.imageContainer} ${className ?? ''}`}>
       <picture>
         {desktopSrc && (
-          <source media="(min-width: 768px)" srcSet={desktopSrc} />
+          <source media="(min-width: 768px)" srcSet={getAssetUrl(desktopSrc)} />
         )}
         <img
-          src={mobileSrc}
+          src={getAssetUrl(mobileSrc)}
           alt={alt}
           className={styles.image}
           loading="lazy"
